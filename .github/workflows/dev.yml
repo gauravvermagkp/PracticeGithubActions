@@ -12,6 +12,9 @@ on:
   push:
     branches: [ "develop" ]
 
+permissions:
+  id-token: write    # This is required for OIDC authentication
+  contents: read
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
