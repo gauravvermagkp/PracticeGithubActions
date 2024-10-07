@@ -17,19 +17,13 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: lable-mylaptop
+    runs-on: ubuntu-latest
     environment:
       name: dev
     steps:
-      - name: Set Azure login Creds using SPN stored in GitHub Secrets
-        run: |
-          echo 'AZURE_CREDS_GITHUB_JSON_VAR = { "clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}" }' >>$GITHUB_ENV
-
       - name: Login to Azure
         uses: Azure/login@v1
         with:
-#          allow-no-subscriptions: true
-#          creds: ${{env.AZURE_CREDS_GITHUB_JSON_VAR}}
           client-id: ${{ secrets.AZURE_CLIENT_ID }}
           tenant-id: ${{ secrets.AZURE_TENANT_ID }}
           subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
