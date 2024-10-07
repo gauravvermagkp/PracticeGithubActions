@@ -1,42 +1,72 @@
 # This is a basic workflow to help you get started with Actions
 
-name: Dev_workflow
+name: Dev_workflow_externalapi
 env:
   MY_FNAME: gaurav
   MY_LNAME: verma
-  PROJECT_PATH: '/home/runner/work'  
+  PROJECT_PATH: '/home/runner/work'
 
 # Controls when the workflow will run
 on:
-  # Triggers the workflow on push or pull request events but only for the "main" branch
+  # Triggers the workflow on push or pull request events but only for the "develop" branch
   push:
-    branches: [ "main" ]  
+    branches: [ "develop" ]
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: ubuntu-latest
+    runs-on: lable-mylaptop
     environment:
       name: dev
-
-    # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
+      - name: Set Azure login Creds using SPN stored in GitHub Secrets
+        run: |
+          echo 'AZURE_CREDS_GITHUB_JSON_VAR = { "clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}","subscriptionId":"${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}" }' >>$GITHUB_ENV
+
+      - name: Login to Azure
+        uses: Azure/login@v1
+        with:
+#          allow-no-subscriptions: true
+#          creds: ${{env.AZURE_CREDS_GITHUB_JSON_VAR}}
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+
+
+
+      - name: Get secrets from Key Vault
+        uses: Azure/get-keyvault-secrets@v1
+        with:
+          vaultName: "gauravkvtest"
+          secretNames: "FName, LNamenew"
+
+      - name: Use the secrets in your workflow
+        run: |
+          echo "Secret 1 value: ${{ secrets.FName }}"          
+          echo "Secret 2 value: ${{ secrets.LNamenew }}"
+
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
         name: checkout Code
         with:
+          sparse-checkout: 'external_api'  # Specify the desired folder
+          sparse-checkout-cone-mode: false
           repository: ${{github.repository}}
-          path: 'hybris_pipeline' 
-            
+          path: 'hybris_pipeline_external_api'
+
       - name: Setup and Run Pipeline
-        working-directory: "${{env.PROJECT_PATH}}/PracticeGitActions/PracticeGitActions/hybris_pipeline/web_app/backend/"
+        working-directory: "D:\\Work_2\\actions-runner\\_work\\PracticeGithubActions\\PracticeGithubActions\\hybris_pipeline_external_api"
         run: |
           echo Setup and Run Pipeline
           python -m venv venv
-          source venv/bin/activate
-          python readEnvPython.py
+          cd venv/Scripts
+          .\activate
+          cd..
+          cd..
+          cd 'Tool\\external_api'
+          python newpythonfile.py
             
 
       # Runs a single command using the runners shell
