@@ -26,7 +26,7 @@ jobs:
     steps:
       - name: Set Azure Login Creds for Github SPN
         run: |
-          echo 'AZURE_CREDS={"cliendID": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "secrets.AZURE_CLIENT_SECRET", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}' >>$GITHUB_ENV
+          echo 'AZURE_CREDS={"clientID": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "secrets.AZURE_CLIENT_SECRET", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}' >>$GITHUB_ENV
       - name: Login to Azure
         uses: Azure/login@v1
         with:
