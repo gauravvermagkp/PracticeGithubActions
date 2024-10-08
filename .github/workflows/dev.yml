@@ -36,13 +36,14 @@ jobs:
       - name: Get secrets from Key Vault
         uses: Azure/get-keyvault-secrets@v1
         with:
-          vaultName: "gauravkvtest"
-          secretNames: "FName, LNamenew"
+          keyvault: "gauravkvtest"
+          secrets: "FName, LNamenew"
+        id: my_secrets_id
 
       - name: Use the secrets in your workflow
         run: |
-          echo "Secret 1 value: ${{ secrets.FName }}"          
-          echo "Secret 2 value: ${{ secrets.LNamenew }}"
+          echo "Secret 1 value: ${{ steps.my_secrets_id.FName }}"          
+          echo "Secret 2 value: ${{ steps.my_secrets_id..LNamenew }}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
