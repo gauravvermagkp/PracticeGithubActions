@@ -65,6 +65,8 @@ jobs:
           cd..
           cd 'Tool\\external_api'
           python newpythonfile.py
+        env:
+          F_NAME: ${{ steps.my_secrets_id.outputs.FName }}
             
 
       # Runs a single command using the runners shell
