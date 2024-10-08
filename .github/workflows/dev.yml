@@ -42,8 +42,8 @@ jobs:
 
       - name: Use the secrets in your workflow
         run: |
-          echo "Secret 1 value: ${{ steps.my_secrets_id.FName }}"          
-          echo "Secret 2 value: ${{ steps.my_secrets_id..LNamenew }}"
+          echo "Secret 1 value: ${{ steps.my_secrets_id.outputs.FName }}"          
+          echo "Secret 2 value: ${{ steps.my_secrets_id.outputs.LNamenew }}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
