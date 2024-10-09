@@ -20,7 +20,7 @@ jobs:
   # This workflow contains a single job called "build"
   build:
     # The type of runner that the job will run on
-    runs-on: lable-mylaptop
+    runs-on: ubuntu-latest
     environment:
       name: dev
     steps:
@@ -53,21 +53,24 @@ jobs:
           sparse-checkout-cone-mode: false
           repository: ${{github.repository}}
           ref: develop
-          path: 'hybris_pipeline_external_api22'
+          path: 'hybris_pipeline_external_api'
+        -name: Show_folder
+         working-directory: "${{github.repository}}/hybris_pipeline_external_api"
+         run: ls
 
-      - name: Setup and Run Pipeline
-        working-directory: "D:\\Work_2\\actions-runner\\_work\\PracticeGithubActions\\PracticeGithubActions\\hybris_pipeline_external_api"
-        run: |
-          echo Setup and Run Pipeline
-          python -m venv venv
-          cd venv/Scripts
-          .\activate
-          cd..
-          cd..
-          cd 'Tool\\external_api'
-          python newpythonfile.py
-        env:
-          F_NAME: ${{ steps.my_secrets_id.outputs.FName }}
+#      - name: Setup and Run Pipeline
+#        working-directory: "D:\\Work_2\\actions-runner\\_work\\PracticeGithubActions\\PracticeGithubActions\\hybris_pipeline_external_api"
+#        run: |
+#          echo Setup and Run Pipeline
+#          python -m venv venv
+#          cd venv/Scripts
+#          .\activate
+#          cd..
+#          cd..
+#          cd 'Tool\\external_api'
+#          python newpythonfile.py
+#        env:
+#          F_NAME: ${{ steps.my_secrets_id.outputs.FName }}
             
 
       # Runs a single command using the runners shell
