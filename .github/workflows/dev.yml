@@ -24,26 +24,26 @@ jobs:
     environment:
       name: dev
     steps:
-      - name: Set Azure Login Creds for Github SPN
-        run: |
-          echo 'AZURE_CREDS={"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{secrets.AZURE_CLIENT_SECRET}}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}' >>$GITHUB_ENV
-      - name: Login to Azure
-        uses: Azure/login@v1
-        with:
-          allow-no-subscriptions: true
-          creds: ${{env.AZURE_CREDS}}
-
-      - name: Get secrets from Key Vault
-        uses: Azure/get-keyvault-secrets@v1
-        with:
-          keyvault: "gauravkvtest"
-          secrets: "FName, LNamenew"
-        id: my_secrets_id
-
-      - name: Use the secrets in your workflow
-        run: |
-          echo "Secret 1 value: ${{ steps.my_secrets_id.outputs.FName }}"          
-          echo "Secret 2 value: ${{ steps.my_secrets_id.outputs.LNamenew }}"
+#      - name: Set Azure Login Creds for Github SPN
+#        run: |
+#          echo 'AZURE_CREDS={"clientId": "${{ secrets.AZURE_CLIENT_ID }}", "clientSecret": "${{secrets.AZURE_CLIENT_SECRET}}", "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}", "tenantId": "${{ secrets.AZURE_TENANT_ID }}"}' >>$GITHUB_ENV
+#      - name: Login to Azure
+#        uses: Azure/login@v1
+#        with:
+#          allow-no-subscriptions: true
+#          creds: ${{env.AZURE_CREDS}}
+#
+#      - name: Get secrets from Key Vault
+#        uses: Azure/get-keyvault-secrets@v1
+#        with:
+#          keyvault: "gauravkvtest"
+#          secrets: "FName, LNamenew"
+#        id: my_secrets_id
+#
+#      - name: Use the secrets in your workflow
+#        run: |
+#          echo "Secret 1 value: ${{ steps.my_secrets_id.outputs.FName }}"
+#          echo "Secret 2 value: ${{ steps.my_secrets_id.outputs.LNamenew }}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v4
