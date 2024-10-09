@@ -52,6 +52,7 @@ jobs:
           sparse-checkout: 'web_app'  # Specify the desired folder
           sparse-checkout-cone-mode: false
           repository: ${{github.repository}}
+          ref: develop
           path: 'hybris_pipeline_external_api'
 
       - name: Setup and Run Pipeline
