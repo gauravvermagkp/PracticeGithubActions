@@ -54,9 +54,9 @@ jobs:
           repository: ${{github.repository}}
           ref: develop
           path: 'hybris_pipeline_external_api'
-        - name: Show_folder
-          working-directory: "${{github.repository}}/hybris_pipeline_external_api"
-          run: ls
+      - name: Show_folder
+        working-directory: "${{github.repository}}/hybris_pipeline_external_api"
+        run: ls
 
 #      - name: Setup and Run Pipeline
 #        working-directory: "D:\\Work_2\\actions-runner\\_work\\PracticeGithubActions\\PracticeGithubActions\\hybris_pipeline_external_api"
