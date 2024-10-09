@@ -52,10 +52,12 @@ jobs:
           sparse-checkout: 'external_api'  # Specify the desired folder
           sparse-checkout-cone-mode: false
           repository: ${{github.repository}}
+          echo '${{github.repository}}'
           ref: develop
           path: 'hybris_pipeline_external_api'
+
       - name: Show_folder
-        working-directory: "${{github.repository}}/hybris_pipeline_external_api"
+        working-directory: ''${{github.repository}}/hybris_pipeline_external_api'
         run: ls
 
 #      - name: Setup and Run Pipeline
