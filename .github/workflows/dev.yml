@@ -49,11 +49,11 @@ jobs:
       - uses: actions/checkout@v3
         name: checkout Code
         with:
-          sparse-checkout: 'web_app'  # Specify the desired folder
+          sparse-checkout: 'external_api'  # Specify the desired folder
           sparse-checkout-cone-mode: false
           repository: ${{github.repository}}
           ref: develop
-          path: 'hybris_pipeline_external_api'
+          path: 'hybris_pipeline_external_api22'
 
       - name: Setup and Run Pipeline
         working-directory: "D:\\Work_2\\actions-runner\\_work\\PracticeGithubActions\\PracticeGithubActions\\hybris_pipeline_external_api"
