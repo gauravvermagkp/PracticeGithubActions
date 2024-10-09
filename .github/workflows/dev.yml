@@ -46,7 +46,7 @@ jobs:
 #          echo "Secret 2 value: ${{ steps.my_secrets_id.outputs.LNamenew }}"
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         name: checkout Code
         with:
           sparse-checkout: 'external_api'  # Specify the desired folder
